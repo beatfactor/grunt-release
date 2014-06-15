@@ -38,6 +38,7 @@ module.exports = function(grunt) {
 
     Q()
       .then(ifEnabled('bump', bump))
+      .then(ifEnabled('push', pull))
       .then(ifEnabled('push', push))
       .then(ifEnabled('pushTags', pushTags))
       .then(ifEnabled('npm', publish))
@@ -92,6 +93,10 @@ module.exports = function(grunt) {
 
     function push() {
       return run('git push', 'pushed to remote git repo');
+    }
+
+    function pull() {
+      return run('git pull', 'pulled from remote git repo');
     }
 
     function pushTags() {
