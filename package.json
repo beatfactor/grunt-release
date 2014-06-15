@@ -1,6 +1,6 @@
 {
-  "name": "grunt-release",
-  "version": "0.7.0",
+  "name": "grunt-npm-release",
+  "version": "0.0.1",
   "description": "Release a new version of your Node-based project",
   "main": "Gruntfile.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/geddski/grunt-release.git"
+    "url": "https://github.com/beatfactor/grunt-release.git"
   },
   "keywords": [
     "gruntplugin",
@@ -21,16 +21,19 @@
   "license": "MIT",
   "dependencies": {
     "shelljs": "~0.1.2",
-    "semver": "~2.0.10",
-    "superagent": "~0.15.4",
-    "q": "~1.0.0"
+    "q": "~1.0.0",
+    "mockery": "~1.4.0"
   },
   "devDependencies": {
     "grunt": "~0.4.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.1.2"
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-remove": "~0.1.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/beatfactor/grunt-release/issues"
+  },
+  "homepage": "https://github.com/beatfactor/grunt-release"
 }

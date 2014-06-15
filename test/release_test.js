@@ -1,13 +1,26 @@
 var grunt = require('grunt');
+var mockery = require('mockery');
 
-exports.release = {
-  bump: function(test){
-    test.expect(1);
+module.exports = {
+  setUp : function(callback) {
+    callback();
+  },
 
-    var actual = grunt.file.readJSON('test/fixtures/_component.json');
-    var expected = grunt.file.readJSON('test/expected/component.json');
-    test.equal(actual.version, expected.version, 'should set version 0.0.13');
+  tearDown : function(callback) {
+    mockery.deregisterAll();
+    mockery.resetCache();
+    mockery.disable();
+
+    callback();
+  },
+
+  minor : function(test) {
+
+
+    var output = require('./output.json');
+    test.equals(output.commands.length, 0);
 
     test.done();
   }
+
 };
