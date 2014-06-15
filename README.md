@@ -1,4 +1,4 @@
-# grunt-npmrelease
+# grunt-npm-release
 [Grunt](http://gruntjs.com) plugin for automating the release steps of a node project to npm. It will also push the new version and tags to Github.
 
 Fork of [geddski/grunt-release](https://github.com/geddski/grunt-release)
