@@ -21,15 +21,9 @@ module.exports = function(grunt) {
       npm : true
     });
 
-    var config = setup(options.file, type);
-    var templateOptions = {
-      data: {
-        version: config.newVersion
-      }
-    };
+    var newVersion = type || 'patch';
     var commitMessage = grunt.config.getRaw('npmrelease.options.commitMessage') || 'release %s';
     var nowrite = options['no-write'] || grunt.option('no-write');
-    var task = this;
     var done = this.async();
 
     if (nowrite) {
@@ -47,13 +41,6 @@ module.exports = function(grunt) {
       })
       .finally(done);
 
-
-    function setup(file, type) {
-      var pkg = grunt.file.readJSON(file);
-      var newVersion = type || 'patch';
-
-      return {file: file, pkg: pkg, newVersion: newVersion};
-    }
 
     function ifEnabled(option, fn) {
       if (options[option]) {
@@ -86,7 +73,7 @@ module.exports = function(grunt) {
     function getNpmTag() {
       var tag = grunt.option('npmtag') || options.npmtag;
       if (tag === true) {
-        tag = config.newVersion;
+        tag = newVersion;
       }
       return tag;
     }
@@ -100,17 +87,17 @@ module.exports = function(grunt) {
     }
 
     function pushTags() {
-      return run('git push --tags', 'pushed new tag '+ config.newVersion +' to remote git repo');
+      return run('git push --tags', 'pushed new tag '+ newVersion +' to remote git repo');
     }
 
     function bump() {
-      var command = util.format('npm version %s -m "%s"', config.newVersion, commitMessage);
+      var command = util.format('npm version %s -m "%s"', newVersion, commitMessage);
       return run(command, 'created new npm version: ' + command);
     }
 
     function publish() {
       var cmd = 'npm publish';
-      var msg = 'published version '+ config.newVersion +' to npm';
+      var msg = 'published version '+ newVersion +' to npm';
       var npmtag = getNpmTag();
       if (npmtag) {
         cmd += ' --tag ' + npmtag;

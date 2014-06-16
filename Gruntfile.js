@@ -5,12 +5,12 @@ module.exports = function(grunt) {
     },
     npmrelease: {
       options: {
-        file: 'package.json',
         push: true,
         bump : true,
         pushTags: true,
         npm: true,
-        npmtag: false
+        npmtag: false,
+        commitMessage : 'bump version to %s'
       }
     },
     setup: {
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('setup', 'Setup test fixtures', function() {
     var commands = [
-      'npm version patch -m "release %s"',
+      'npm version patch -m "bump version to %s"',
       'git push',
       'git push --tags',
       'npm publish --tag testTag'
