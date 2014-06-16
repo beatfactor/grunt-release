@@ -21,6 +21,8 @@ module.exports = function(grunt) {
       npm : true
     });
 
+    options.silent = typeof options.silent == 'undefined' || options.silent;
+
     var newVersion = type || 'patch';
     var commitMessage = grunt.config.getRaw('npmrelease.options.commitMessage') || 'release %s';
     var nowrite = options['no-write'] || grunt.option('no-write');
@@ -57,7 +59,7 @@ module.exports = function(grunt) {
         deferred.resolve();
       } else {
         var shell = require('shelljs');
-        var success = shell.exec(cmd, {silent:true}).code === 0;
+        var success = shell.exec(cmd, {silent:options.silent}).code === 0;
 
         if (success) {
           grunt.log.ok(msg || cmd);

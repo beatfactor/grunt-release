@@ -10,6 +10,7 @@ module.exports = function(grunt) {
         pushTags: true,
         npm: true,
         npmtag: false,
+        silent : false,
         commitMessage : 'bump version to %s'
       }
     },
